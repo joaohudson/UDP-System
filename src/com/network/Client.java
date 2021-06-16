@@ -1,5 +1,6 @@
 package com.network;
 
+import com.network.models.NetworkMessage;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.io.IOException;
@@ -18,21 +19,23 @@ public class Client {
         this.ipServer = InetAddress.getByName(ipServer);
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, ClassNotFoundException{
         while(true){
             Scanner scan = new Scanner(System.in);
             String input = scan.nextLine();
+            NetworkMessage message = new NetworkMessage();
+            message.setText(input);
 
             //send message
-            byte[] sendData = input.getBytes();
+            byte[] sendData = message.toBytes();
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, ipServer, serverPort);
             socket.send(sendPacket);
 
             //receive response
             DatagramPacket receivePacket = new DatagramPacket(new byte[1024], 1024);
             socket.receive(receivePacket);
-            String response = new String(receivePacket.getData());
-            System.out.println(response);
+            NetworkMessage response = NetworkMessage.from(receivePacket.getData());
+            System.out.println(response.getText());
         }
     }
 }

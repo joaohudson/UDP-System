@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Servidor-UDP.iml" filepath="$PROJECT_DIR$/Servidor-UDP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UDP-System.iml" filepath="$PROJECT_DIR$/UDP-System.iml" />
     </modules>
   </component>
 </project>
